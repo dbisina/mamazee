@@ -8,7 +8,7 @@ export default function Story() {
   const isMobile = bp === "foldable" || bp === "mobile" || bp === "phablet";
   const storyCols = isMobile ? "1fr" : "1fr 1fr";
   const storyGap = isMobile ? "3rem" : "clamp(3rem, 8vw, 8rem)";
-  const statsCols = "1fr 1fr";
+  const statsCols = isMobile ? "1fr" : "1fr 1fr";
 
   return (
     <section

@@ -43,9 +43,8 @@ const cats = [
 export default function Categories() {
   const bp = useBreakpoint();
   const catCols =
-    bp === "foldable" || bp === "mobile" ? "1fr" :
-    bp === "phablet" ? "1fr 1fr" :
-    bp === "foldable-open" ? "repeat(3, 1fr)" :
+    bp === "foldable" || bp === "mobile" || bp === "phablet" ? "1fr" :
+    bp === "foldable-open" ? "1fr 1fr" :
     "repeat(4, 1fr)";
   const catGap = bp === "foldable" || bp === "mobile" || bp === "phablet" ? "0.875rem" : "1.25rem";
 

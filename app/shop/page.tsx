@@ -29,9 +29,9 @@ export default function ShopPage() {
   const bp = useBreakpoint();
   const isMobile = bp === "foldable" || bp === "mobile" || bp === "phablet";
   const cols =
-    bp === "foldable" || bp === "mobile" ? "1fr" :
-    bp === "phablet" ? "1fr 1fr" :
-    bp === "foldable-open" ? "repeat(3, 1fr)" :
+    bp === "foldable" || bp === "mobile" || bp === "phablet" ? "1fr" :
+    bp === "foldable-open" ? "1fr 1fr" :
+    bp === "tablet" ? "repeat(3, 1fr)" :
     "repeat(4, 1fr)";
 
   const filtered = useMemo(
@@ -206,14 +206,9 @@ export default function ShopPage() {
 
 function ProductCard({ product }: { product: (typeof products)[0] }) {
   const [hovered, setHovered] = useState(false);
-  const [added, setAdded] = useState(false);
-  const { addItem } = useCart();
-
-  const handleAdd = () => {
-    addItem({ id: product.id, name: product.name, price: product.price, unit: product.unit, image: product.image });
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1500);
-  };
+  const { addItem, items, setQty } = useCart();
+  const cartItem = items.find((i) => i.id === product.id);
+  const qty = cartItem?.quantity ?? 0;
 
   return (
     <div
@@ -226,7 +221,7 @@ function ProductCard({ product }: { product: (typeof products)[0] }) {
           src={product.image}
           alt={product.name}
           fill
-          sizes="(max-width: 768px) 50vw, 25vw"
+          sizes="(max-width: 768px) 100vw, 25vw"
           style={{ objectFit: "cover", transition: "transform 0.7s cubic-bezier(0.16,1,0.3,1)", transform: hovered ? "scale(1.07)" : "scale(1)" }}
         />
         {product.tag && (
@@ -234,26 +229,64 @@ function ProductCard({ product }: { product: (typeof products)[0] }) {
             {product.tag}
           </span>
         )}
-        <button
-          onClick={handleAdd}
-          style={{ position: "absolute", bottom: "1rem", left: "50%", transform: hovered ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(calc(100% + 1rem))", transition: "transform 0.45s cubic-bezier(0.16,1,0.3,1), background 0.2s ease", padding: "0.75rem 1.5rem", background: added ? "#2D5A16" : "#F8F4EE", color: added ? "#F8F4EE" : "#0E0D09", border: "none", borderRadius: "100px", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500, cursor: "pointer", whiteSpace: "nowrap", fontFamily: "var(--font-inter), system-ui, sans-serif", boxShadow: "0 8px 24px rgba(14,13,9,0.12)" }}
-        >
-          {added ? "Added ✓" : "Add to Cart"}
-        </button>
+
+        {qty > 0 ? (
+          /* Quantity stepper — always visible once item is in cart */
+          <div
+            style={{
+              position: "absolute",
+              bottom: "1rem",
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              alignItems: "center",
+              background: "#2D5A16",
+              borderRadius: "100px",
+              boxShadow: "0 8px 24px rgba(14,13,9,0.18)",
+              overflow: "hidden",
+            }}
+          >
+            <button
+              onClick={(e) => { e.stopPropagation(); setQty(product.id, qty - 1); }}
+              style={{ padding: "0.65rem 1rem", background: "none", border: "none", color: "#F8F4EE", fontSize: "1.1rem", lineHeight: 1, cursor: "pointer", fontFamily: "var(--font-inter), system-ui, sans-serif", fontWeight: 300 }}
+            >
+              −
+            </button>
+            <span
+              style={{ minWidth: "1.75rem", textAlign: "center", fontSize: "0.875rem", fontWeight: 600, color: "#F8F4EE", fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+            >
+              {qty}
+            </span>
+            <button
+              onClick={(e) => { e.stopPropagation(); setQty(product.id, qty + 1); }}
+              style={{ padding: "0.65rem 1rem", background: "none", border: "none", color: "#F8F4EE", fontSize: "1.1rem", lineHeight: 1, cursor: "pointer", fontFamily: "var(--font-inter), system-ui, sans-serif", fontWeight: 300 }}
+            >
+              +
+            </button>
+          </div>
+        ) : (
+          /* Add to Cart — hover-reveal */
+          <button
+            onClick={(e) => { e.stopPropagation(); addItem({ id: product.id, name: product.name, price: product.price, unit: product.unit, image: product.image }); }}
+            style={{ position: "absolute", bottom: "1rem", left: "50%", transform: hovered ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(calc(100% + 1rem))", transition: "transform 0.45s cubic-bezier(0.16,1,0.3,1)", padding: "0.75rem 1.5rem", background: "#F8F4EE", color: "#0E0D09", border: "none", borderRadius: "100px", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500, cursor: "pointer", whiteSpace: "nowrap", fontFamily: "var(--font-inter), system-ui, sans-serif", boxShadow: "0 8px 24px rgba(14,13,9,0.12)" }}
+          >
+            Add to Cart
+          </button>
+        )}
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "1rem" }}>
         <div>
           <p style={{ fontSize: "0.6875rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#A0A097", marginBottom: "0.375rem", fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
             {product.category}
           </p>
-          <h3 style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "clamp(1.125rem,2vw,1.4rem)", fontWeight: 400, letterSpacing: "-0.01em", color: "#0E0D09", margin: 0, lineHeight: 1.2 }}>
+          <h3 style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "clamp(0.9375rem,1.5vw,1.1875rem)", fontWeight: 400, letterSpacing: "-0.01em", color: "#0E0D09", margin: 0, lineHeight: 1.2 }}>
             {product.name}
           </h3>
           <p style={{ fontSize: "0.8125rem", color: "#5C5B54", marginTop: "0.375rem", lineHeight: 1.5, fontFamily: "var(--font-inter), system-ui, sans-serif", fontWeight: 300 }}>
             {product.unit}
           </p>
         </div>
-        <div style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "clamp(1.125rem,2vw,1.375rem)", fontWeight: 500, color: "#2D5A16", whiteSpace: "nowrap", marginTop: "0.25rem" }}>
+        <div style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "clamp(0.9375rem,1.5vw,1.125rem)", fontWeight: 500, color: "#2D5A16", whiteSpace: "nowrap", marginTop: "0.25rem" }}>
           ${product.price.toFixed(2)}
         </div>
       </div>
