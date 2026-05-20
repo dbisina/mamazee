@@ -5,10 +5,10 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 export default function Story() {
   const bp = useBreakpoint();
-  const isMobile = bp === "mobile" || bp === "phablet";
+  const isMobile = bp === "foldable" || bp === "mobile" || bp === "phablet";
   const storyCols = isMobile ? "1fr" : "1fr 1fr";
   const storyGap = isMobile ? "3rem" : "clamp(3rem, 8vw, 8rem)";
-  const statsCols = isMobile ? "1fr 1fr" : "1fr 1fr";
+  const statsCols = "1fr 1fr";
 
   return (
     <section
@@ -93,7 +93,7 @@ export default function Story() {
                 }}
               >
                 Mamazee started from a simple truth: the taste of home shouldn't be hard to find.
-                We source directly from trusted suppliers in Nigeria and West Africa —
+                We source directly from trusted suppliers in Nigeria and West Africa,
                 so every packet of garri, every bottle of palm oil carries the real thing.
               </p>
             </ScrollReveal>
@@ -119,7 +119,7 @@ export default function Story() {
           <div style={{ display: "grid", gridTemplateColumns: statsCols, gap: "1rem" }}>
             {[
               { num: "200+", label: "Products in stock", sub: "Groceries, spices, beauty" },
-              { num: "5★", label: "Customer rating", sub: "Verified reviews" },
+              { num: "4.9", label: "Customer rating", sub: "Google & Facebook" },
               { num: "2019", label: "Founded", sub: "Melbourne, Victoria" },
               { num: "AU-Wide", label: "Shipping", sub: "Fast & tracked delivery" },
             ].map((s, i) => (

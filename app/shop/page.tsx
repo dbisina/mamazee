@@ -27,10 +27,11 @@ const TAG_LABELS: Record<string, string> = {
 export default function ShopPage() {
   const [active, setActive] = useState("All");
   const bp = useBreakpoint();
-  const isMobile = bp === "mobile" || bp === "phablet";
+  const isMobile = bp === "foldable" || bp === "mobile" || bp === "phablet";
   const cols =
-    bp === "mobile" ? "1fr" :
-    bp === "phablet" || bp === "tablet" ? "1fr 1fr" :
+    bp === "foldable" || bp === "mobile" ? "1fr" :
+    bp === "phablet" ? "1fr 1fr" :
+    bp === "foldable-open" ? "repeat(3, 1fr)" :
     "repeat(4, 1fr)";
 
   const filtered = useMemo(
@@ -77,7 +78,7 @@ export default function ShopPage() {
           <p style={{ fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C4813A", marginBottom: "1rem", fontFamily: "var(--font-inter), system-ui, sans-serif", fontWeight: 500 }}>
             Mamazee Store
           </p>
-          <h1 style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "clamp(3rem,7vw,6rem)", fontWeight: 400, letterSpacing: "-0.03em", color: "#F8F4EE", margin: 0, lineHeight: 0.95 }}>
+          <h1 style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "clamp(2rem,7vw,6rem)", fontWeight: 400, letterSpacing: "-0.03em", color: "#F8F4EE", margin: 0, lineHeight: 0.95 }}>
             Our <span style={{ fontStyle: "italic", color: "#C4813A" }}>Collection.</span>
           </h1>
           <p style={{ marginTop: "1.5rem", fontSize: "clamp(0.9375rem,1.5vw,1.0625rem)", color: "rgba(248,244,238,0.55)", fontFamily: "var(--font-inter), system-ui, sans-serif", fontWeight: 300, maxWidth: "480px" }}>

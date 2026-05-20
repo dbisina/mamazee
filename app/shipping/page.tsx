@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata = {
-  title: "Shipping Info — Mamazee",
+  title: "Shipping Info | Mamazee",
   description: "Delivery options, timelines, and pricing for Mamazee orders across Australia.",
 };
 
@@ -17,9 +17,9 @@ const zones = [
 const faqs = [
   { q: "When do you dispatch?", a: "Orders placed before 12PM Monday–Saturday are dispatched the same day. Orders after 12PM dispatch the next business day." },
   { q: "Do you offer free shipping?", a: "Free standard shipping on orders over $120 Australia-wide." },
-  { q: "What carriers do you use?", a: "Australia Post and Couriers Please — both with full tracking. You'll receive a tracking number by email once your order is dispatched." },
-  { q: "Can I pick up in-store?", a: "Yes — pick-up is available at 68 Malone Cct, Deanside VIC 3336. Tuesday–Sunday, 10:00 AM–7:00 PM. Allow 2–3 hours from order time." },
-  { q: "What if my order arrives damaged?", a: "Contact us within 48 hours with a photo. We'll replace or refund — no questions asked." },
+  { q: "What carriers do you use?", a: "Australia Post and Couriers Please, both with full tracking. You'll receive a tracking number by email once your order is dispatched." },
+  { q: "Can I pick up in-store?", a: "Yes, pick-up is available at 68 Malone Cct, Deanside VIC 3336. Tuesday to Sunday, 10:00 AM to 7:00 PM. Allow 2 to 3 hours from order time." },
+  { q: "What if my order arrives damaged?", a: "Contact us within 48 hours with a photo. We'll replace or refund, no questions asked." },
 ];
 
 export default function ShippingPage() {
@@ -32,7 +32,7 @@ export default function ShippingPage() {
         <div aria-hidden style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(4rem,14vw,14rem)", fontWeight: 300, color: "rgba(248,244,238,0.03)", whiteSpace: "nowrap", pointerEvents: "none", lineHeight: 1 }}>Shipping</div>
         <div style={{ maxWidth: "1440px", margin: "0 auto", position: "relative", zIndex: 1 }}>
           <p style={{ fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C4813A", marginBottom: "1rem", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 500 }}>Delivery</p>
-          <h1 style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(3rem,7vw,6.5rem)", fontWeight: 400, letterSpacing: "-0.03em", color: "#F8F4EE", margin: 0, lineHeight: 0.93 }}>
+          <h1 style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(2rem,7vw,6.5rem)", fontWeight: 400, letterSpacing: "-0.03em", color: "#F8F4EE", margin: 0, lineHeight: 0.93 }}>
             Shipping <span style={{ fontStyle: "italic", color: "#C4813A" }}>Info.</span>
           </h1>
           <p style={{ marginTop: "1.5rem", fontSize: "clamp(0.9375rem,1.5vw,1rem)", color: "rgba(248,244,238,0.55)", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 300, maxWidth: "500px" }}>

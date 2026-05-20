@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 const faqs = [
   {
     q: "Do you ship Australia-wide?",
-    a: "Yes — we ship to all Australian states and territories. Orders are dispatched Monday–Saturday. Standard delivery is 3–7 business days; express options available at checkout.",
+    a: "Yes, we ship to all Australian states and territories. Orders are dispatched Monday to Saturday. Standard delivery is 3 to 7 business days; express options available at checkout.",
   },
   {
     q: "Can I pick up my order in-store?",
@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     q: "Are your products freshly imported?",
-    a: "Yes. We source directly from trusted suppliers in Nigeria and West Africa. We rotate stock regularly — if we wouldn't eat it ourselves, it doesn't go on the shelf.",
+    a: "Yes. We source directly from trusted suppliers in Nigeria and West Africa. We rotate stock regularly. If we wouldn't eat it ourselves, it doesn't go on the shelf.",
   },
   {
     q: "How do I place a bulk or wholesale order?",
@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: "What payment methods do you accept?",
-    a: "We accept all major credit/debit cards (Visa, Mastercard, Amex), PayPal, Apple Pay, Google Pay, and Afterpay — buy now, pay later. In-store we also accept cash.",
+    a: "We accept all major credit/debit cards (Visa, Mastercard, Amex), PayPal, Apple Pay, Google Pay, and Afterpay (buy now, pay later). In-store we also accept cash.",
   },
   {
     q: "What is your returns policy?",
@@ -35,7 +35,7 @@ const faqs = [
   },
   {
     q: "Do you sell products not listed on the website?",
-    a: "Very likely. Our in-store range is larger than what's shown online. If you're looking for something specific, message us on WhatsApp — we'll let you know if we have it and add it to your order.",
+    a: "Very likely. Our in-store range is larger than what's shown online. If you're looking for something specific, message us on WhatsApp and we'll let you know if we have it and add it to your order.",
   },
   {
     q: "How are products packaged for delivery?",
@@ -59,7 +59,7 @@ export default function FAQPage() {
         <div aria-hidden style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(5rem,16vw,16rem)", fontWeight: 300, color: "rgba(248,244,238,0.03)", whiteSpace: "nowrap", pointerEvents: "none", lineHeight: 1 }}>FAQ</div>
         <div style={{ maxWidth: "1440px", margin: "0 auto", position: "relative", zIndex: 1 }}>
           <p style={{ fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C4813A", marginBottom: "1rem", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 500 }}>Frequently Asked</p>
-          <h1 style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(3rem,7vw,6.5rem)", fontWeight: 400, letterSpacing: "-0.03em", color: "#F8F4EE", margin: 0, lineHeight: 0.93 }}>
+          <h1 style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(2rem,7vw,6.5rem)", fontWeight: 400, letterSpacing: "-0.03em", color: "#F8F4EE", margin: 0, lineHeight: 0.93 }}>
             Got <span style={{ fontStyle: "italic", color: "#C4813A" }}>questions?</span>
           </h1>
         </div>
@@ -90,7 +90,7 @@ export default function FAQPage() {
         <div style={{ marginTop: "4rem", padding: "2.5rem", background: "#1A3A0A", borderRadius: "1.25rem", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "1.5rem" }}>
           <div>
             <p style={{ fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C4813A", marginBottom: "0.5rem", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 500 }}>Still have questions?</p>
-            <p style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(1.25rem,2.5vw,2rem)", fontWeight: 400, color: "#F8F4EE", margin: 0 }}>Chat with us on WhatsApp — we reply fast.</p>
+            <p style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(1.25rem,2.5vw,2rem)", fontWeight: 400, color: "#F8F4EE", margin: 0 }}>Chat with us on WhatsApp. We reply fast.</p>
           </div>
           <a
             href="https://wa.me/61468324309"

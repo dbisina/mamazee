@@ -162,7 +162,7 @@ export default function CartDrawer() {
             <a
               href={`https://wa.me/61468324309?text=${encodeURIComponent(
                 "Hi Mamazee, I'd like to order:\n" +
-                items.map((i) => `• ${i.name} × ${i.quantity} (${i.unit}) — $${(i.price * i.quantity).toFixed(2)}`).join("\n") +
+                items.map((i) => `• ${i.name} x${i.quantity} (${i.unit}): $${(i.price * i.quantity).toFixed(2)}`).join("\n") +
                 `\n\nTotal: $${total.toFixed(2)}`
               )}`}
               target="_blank"

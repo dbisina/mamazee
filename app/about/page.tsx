@@ -3,12 +3,12 @@ import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata = {
-  title: "Our Story — Mamazee",
+  title: "Our Story | Mamazee",
   description: "How Mamazee was built by the Nigerian diaspora, for the diaspora.",
 };
 
 const values = [
-  { num: "01", title: "Authenticity", body: "Every product traced to origin. No substitutes, no compromises — just the real thing your mother used." },
+  { num: "01", title: "Authenticity", body: "Every product traced to origin. No substitutes, no compromises. Just the real thing your mother used." },
   { num: "02", title: "Community", body: "We exist because of the diaspora. Your orders fund a store where Nigerians can gather, taste, and belong." },
   { num: "03", title: "Freshness", body: "Constant stock rotation. If we wouldn't eat it ourselves, it doesn't go on the shelf." },
   { num: "04", title: "Accessibility", body: "Online delivery AU-wide plus local pick-up in Melbourne. Nigerian food shouldn't require a special trip." },
@@ -24,7 +24,7 @@ export default function AboutPage() {
         <div aria-hidden style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(5rem,16vw,16rem)", fontWeight: 300, color: "rgba(248,244,238,0.03)", whiteSpace: "nowrap", pointerEvents: "none", letterSpacing: "-0.04em", lineHeight: 1 }}>Story</div>
         <div style={{ maxWidth: "1440px", margin: "0 auto", position: "relative", zIndex: 1 }}>
           <p style={{ fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C4813A", marginBottom: "1rem", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 500 }}>Our Story</p>
-          <h1 style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(3rem,7vw,7rem)", fontWeight: 400, letterSpacing: "-0.03em", color: "#F8F4EE", margin: 0, lineHeight: 0.93, maxWidth: "800px" }}>
+          <h1 style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(2rem,7vw,7rem)", fontWeight: 400, letterSpacing: "-0.03em", color: "#F8F4EE", margin: 0, lineHeight: 0.93, maxWidth: "800px" }}>
             Built by the{" "}
             <span style={{ fontStyle: "italic", color: "#C4813A" }}>diaspora,</span>
             <br />for the diaspora.
@@ -34,17 +34,17 @@ export default function AboutPage() {
 
       {/* Story body */}
       <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "clamp(5rem,10vw,10rem) clamp(1.5rem,4vw,4rem)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: "clamp(4rem,8vw,10rem)", alignItems: "start" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,420px),1fr))", gap: "clamp(2.5rem,6vw,10rem)", alignItems: "start" }}>
           <ScrollReveal>
             <div>
               <p style={{ fontSize: "clamp(1.0625rem,1.8vw,1.25rem)", lineHeight: 1.8, color: "#0E0D09", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 300, marginBottom: "2rem" }}>
                 Mamazee started from a simple truth: the taste of home shouldn&apos;t be hard to find.
               </p>
               <p style={{ fontSize: "clamp(0.9375rem,1.5vw,1.0625rem)", lineHeight: 1.75, color: "#5C5B54", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 300, marginBottom: "2rem" }}>
-                When our founders arrived in Melbourne, they discovered what every Nigerian in the diaspora knows too well: finding authentic ingredients meant long drives to specialty shops — if they existed at all. Palm oil that tasted right. Garri that soaked properly. Crayfish that actually smelled like home.
+                When our founders arrived in Melbourne, they discovered what every Nigerian in the diaspora knows too well: finding authentic ingredients meant long drives to specialty shops, if they existed at all. Palm oil that tasted right. Garri that soaked properly. Crayfish that actually smelled like home.
               </p>
               <p style={{ fontSize: "clamp(0.9375rem,1.5vw,1.0625rem)", lineHeight: 1.75, color: "#5C5B54", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 300 }}>
-                So in 2019, they opened Mamazee from a small store in Melbourne. Today we ship AU-wide, carry 200+ products sourced directly from Nigeria and West Africa, and still believe that every packet of garri and every bottle of palm oil should carry the real thing — no compromise, no substitutes.
+                So in 2019, they opened Mamazee from a small store in Melbourne. Today we ship AU-wide, carry 200+ products sourced directly from Nigeria and West Africa, and still believe that every packet of garri and every bottle of palm oil should carry the real thing: no compromise, no substitutes.
               </p>
             </div>
           </ScrollReveal>
@@ -56,7 +56,7 @@ export default function AboutPage() {
                 No compromise. No substitutes. Just your childhood favourites, ready to order online or pick up in Melbourne.
               </p>
               <p style={{ fontSize: "0.8125rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#C4813A", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 500 }}>
-                — Mamazee Founders, 2019
+                Mamazee Founders, 2019
               </p>
             </div>
           </ScrollReveal>

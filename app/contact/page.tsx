@@ -16,7 +16,7 @@ const STORE = {
 
 export default function ContactPage() {
   const bp = useBreakpoint();
-  const isMobile = bp === "mobile" || bp === "phablet";
+  const isMobile = bp === "foldable" || bp === "mobile" || bp === "phablet";
   const [form, setForm] = useState({ name: "", email: "", phone: "", reason: "", message: "" });
   const [sent, setSent] = useState(false);
 
@@ -39,7 +39,7 @@ export default function ContactPage() {
         <div aria-hidden style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(5rem,16vw,16rem)", fontWeight: 300, color: "rgba(248,244,238,0.03)", whiteSpace: "nowrap", pointerEvents: "none", lineHeight: 1 }}>Contact</div>
         <div style={{ maxWidth: "1440px", margin: "0 auto", position: "relative", zIndex: 1 }}>
           <p style={{ fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C4813A", marginBottom: "1rem", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 500 }}>Get In Touch</p>
-          <h1 style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(3rem,7vw,6.5rem)", fontWeight: 400, letterSpacing: "-0.03em", color: "#F8F4EE", margin: 0, lineHeight: 0.93 }}>
+          <h1 style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(2rem,7vw,6.5rem)", fontWeight: 400, letterSpacing: "-0.03em", color: "#F8F4EE", margin: 0, lineHeight: 0.93 }}>
             We&apos;d love to <span style={{ fontStyle: "italic", color: "#C4813A" }}>hear</span>
             <br />from you.
           </h1>

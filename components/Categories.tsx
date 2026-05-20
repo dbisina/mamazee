@@ -3,46 +3,39 @@
 import ScrollReveal from "./ScrollReveal";
 import Link from "next/link";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
+import { products } from "@/lib/products";
 
 const cats = [
   {
     id: "pantry",
     name: "Pantry\nStaples",
-    sub: "48 products",
     color: "#C4813A",
     bg: "#EDE8DF",
     href: "/shop?cat=pantry",
-    icon: "🌿",
     items: ["Garri", "Palm Oil", "Fufu", "Stockfish", "Crayfish"],
   },
   {
     id: "spices",
     name: "Spices &\nPeppers",
-    sub: "32 products",
     color: "#2D5A16",
     bg: "#D4E8C4",
     href: "/shop?cat=spices",
-    icon: "🌶",
     items: ["Uziza", "Ehuru", "Suya Spice", "Uda", "Ogiri"],
   },
   {
     id: "snacks",
     name: "Snacks &\nDrinks",
-    sub: "24 products",
     color: "#5C3A1E",
     bg: "#EDD5BC",
     href: "/shop?cat=snacks",
-    icon: "✨",
     items: ["Chin Chin", "Zobo", "Kunu", "Puff Puff", "Kilishi"],
   },
   {
     id: "beauty",
     name: "Hair &\nBeauty",
-    sub: "18 products",
     color: "#1A3A0A",
     bg: "#E8DDD0",
     href: "/shop?cat=beauty",
-    icon: "🌸",
     items: ["Shea Butter", "Black Soap", "Argan Oil", "Cocoa Butter"],
   },
 ];
@@ -50,10 +43,11 @@ const cats = [
 export default function Categories() {
   const bp = useBreakpoint();
   const catCols =
-    bp === "mobile" ? "1fr" :
-    bp === "phablet" || bp === "tablet" ? "1fr 1fr" :
+    bp === "foldable" || bp === "mobile" ? "1fr" :
+    bp === "phablet" ? "1fr 1fr" :
+    bp === "foldable-open" ? "repeat(3, 1fr)" :
     "repeat(4, 1fr)";
-  const catGap = bp === "mobile" || bp === "phablet" ? "0.875rem" : "1.25rem";
+  const catGap = bp === "foldable" || bp === "mobile" || bp === "phablet" ? "0.875rem" : "1.25rem";
 
   return (
     <section
@@ -150,7 +144,7 @@ export default function Categories() {
                   (e.currentTarget as HTMLElement).style.boxShadow = "none";
                 }}
               >
-                {/* Tag */}
+                {/* Tag — real product count */}
                 <span
                   style={{
                     display: "inline-block",
@@ -165,7 +159,7 @@ export default function Categories() {
                     fontWeight: 500,
                   }}
                 >
-                  {cat.sub}
+                  {products.filter(p => p.category === cat.id).length} products
                 </span>
 
                 {/* Category name */}

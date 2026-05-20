@@ -9,7 +9,7 @@ const HERO_WORDS = ["Taste", "of", "Home."];
 
 export default function Hero() {
   const bp = useBreakpoint();
-  const isMobile = bp === "mobile" || bp === "phablet";
+  const isMobile = bp === "foldable" || bp === "mobile" || bp === "phablet";
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -95,7 +95,7 @@ export default function Hero() {
         {/* Desktop / tablet landscape */}
         <Image
           src="/hero.png"
-          alt="Nigerian pantry staples — spices, palm oil, wooden mortar, wicker basket"
+          alt="Nigerian pantry staples: spices, palm oil, wooden mortar, wicker basket"
           fill
           priority
           className="hero-img-desktop"
@@ -180,7 +180,7 @@ export default function Hero() {
           ref={headlineRef}
           style={{
             fontFamily: "var(--font-cormorant), Georgia, serif",
-            fontSize: "clamp(3.5rem, 7vw, 7.5rem)",
+            fontSize: "clamp(2.25rem, 8vw, 7.5rem)",
             fontWeight: 400,
             lineHeight: 0.93,
             letterSpacing: "-0.03em",
@@ -221,7 +221,7 @@ export default function Hero() {
           className="hero-subtitle"
           style={{
             marginTop: "2rem",
-            maxWidth: "400px",
+            maxWidth: "min(400px, 90%)",
             fontSize: "clamp(0.9375rem, 1.5vw, 1.0625rem)",
             lineHeight: 1.65,
             color: "#5C5B54",
@@ -231,7 +231,7 @@ export default function Hero() {
           }}
         >
           Premium authentic Nigerian pantry staples, spices, and
-          snacks — shipped to your door anywhere in Australia.
+          snacks, shipped to your door anywhere in Australia.
         </p>
 
         {/* CTAs */}
@@ -343,48 +343,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "2.5rem",
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "0.5rem",
-          zIndex: 3,
-        }}
-      >
-        <span
-          style={{
-            fontSize: "0.625rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "#5C5B54",
-            fontFamily: "var(--font-inter), system-ui, sans-serif",
-          }}
-        >
-          Scroll
-        </span>
-        <div
-          style={{
-            width: "1px",
-            height: "48px",
-            background: "linear-gradient(to bottom, rgba(92,91,84,0.6), transparent)",
-            animation: "scrollLine 1.8s ease-in-out infinite",
-          }}
-        />
-        <style>{`
-          @keyframes scrollLine {
-            0% { transform: scaleY(0); transform-origin: top; }
-            50% { transform: scaleY(1); transform-origin: top; }
-            51% { transform: scaleY(1); transform-origin: bottom; }
-            100% { transform: scaleY(0); transform-origin: bottom; }
-          }
-        `}</style>
-      </div>
 
     </section>
   );

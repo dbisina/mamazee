@@ -27,15 +27,13 @@ const links = {
 
 export default function Footer() {
   const bp = useBreakpoint();
-  const isMobile = bp === "mobile" || bp === "phablet";
+  const isMobile = bp === "foldable" || bp === "mobile" || bp === "phablet";
   const footerCols =
-    bp === "mobile" ? "1fr" :
-    bp === "phablet" ? "1fr 1fr" :
-    bp === "tablet" ? "1fr 1fr" :
+    bp === "foldable" || bp === "mobile" ? "1fr" :
+    bp === "phablet" || bp === "foldable-open" || bp === "tablet" ? "1fr 1fr" :
     "2fr 1fr 1fr 1fr";
   const footerGap =
-    bp === "mobile" ? "2rem" :
-    bp === "phablet" ? "2rem" :
+    bp === "foldable" || bp === "mobile" || bp === "phablet" ? "2rem" :
     "clamp(2rem, 4vw, 5rem)";
 
   return (
@@ -88,15 +86,18 @@ export default function Footer() {
               Premium Nigerian groceries, spices, and pantry essentials.
               Serving the Australian diaspora since 2019.
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-              <p style={{ fontSize: "0.8125rem", color: "rgba(248,244,238,0.4)", fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
-                📍 68 Malone Cct, Deanside VIC 3336
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
+              <p style={{ fontSize: "0.8125rem", color: "rgba(248,244,238,0.4)", fontFamily: "var(--font-inter), system-ui, sans-serif", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, opacity: 0.7 }}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                68 Malone Cct, Deanside VIC 3336
               </p>
-              <a href="https://wa.me/61468324309" style={{ fontSize: "0.8125rem", color: "rgba(248,244,238,0.4)", fontFamily: "var(--font-inter), system-ui, sans-serif", textDecoration: "none" }}>
-                📞 +61 468 324 309
+              <a href="https://wa.me/61468324309" style={{ fontSize: "0.8125rem", color: "rgba(248,244,238,0.4)", fontFamily: "var(--font-inter), system-ui, sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, opacity: 0.7 }}><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.99 2.18 2 2 0 012.98 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+                +61 468 324 309
               </a>
-              <p style={{ fontSize: "0.8125rem", color: "rgba(248,244,238,0.4)", fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
-                🕐 Tue–Sun · 10AM–7PM
+              <p style={{ fontSize: "0.8125rem", color: "rgba(248,244,238,0.4)", fontFamily: "var(--font-inter), system-ui, sans-serif", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, opacity: 0.7 }}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Tue–Sun · 10AM–7PM
               </p>
             </div>
           </div>

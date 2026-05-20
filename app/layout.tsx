@@ -21,11 +21,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Mamazee — Authentic Nigerian Groceries",
+  title: "Mamazee | Authentic Nigerian Groceries",
   description:
     "Premium Nigerian groceries, spices, and pantry staples. Delivered fresh to your door across Australia.",
   openGraph: {
-    title: "Mamazee — Authentic Nigerian Groceries",
+    title: "Mamazee | Authentic Nigerian Groceries",
     description: "Premium Nigerian groceries, spices, and pantry staples.",
     type: "website",
   },

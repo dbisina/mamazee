@@ -15,6 +15,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isFoldable, setIsFoldable] = useState(false);
   const lastY = useRef(0);
   const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
@@ -29,7 +30,11 @@ export default function Nav() {
   const cartBorderColor = !scrolled && isDarkPage ? "rgba(248,244,238,0.25)" : "rgba(14,13,9,0.18)";
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    // show hamburger on phablet and below (≤768); foldable-open and above get desktop nav
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsFoldable(window.innerWidth <= 375);
+    };
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
@@ -72,7 +77,7 @@ export default function Nav() {
           style={{
             maxWidth: "1440px",
             margin: "0 auto",
-            padding: "0 clamp(1.5rem, 4vw, 4rem)",
+            padding: "0 clamp(1rem, 4vw, 4rem)",
             height: "72px",
             display: "flex",
             alignItems: "center",
@@ -84,7 +89,7 @@ export default function Nav() {
             href="/"
             style={{
               fontFamily: "var(--font-cormorant), Georgia, serif",
-              fontSize: "1.75rem",
+              fontSize: isFoldable ? "1.375rem" : "1.75rem",
               fontWeight: 500,
               letterSpacing: "-0.02em",
               color: logoColor,

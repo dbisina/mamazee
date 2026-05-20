@@ -165,10 +165,11 @@ function ProductCard({ product, index }: { product: (typeof featuredProducts)[0]
 export default function FeaturedProducts() {
   const bp = useBreakpoint();
   const prodCols =
-    bp === "mobile" ? "1fr" :
-    bp === "phablet" || bp === "tablet" ? "1fr 1fr" :
+    bp === "foldable" || bp === "mobile" ? "1fr" :
+    bp === "phablet" ? "1fr 1fr" :
+    bp === "foldable-open" ? "repeat(3, 1fr)" :
     "repeat(4, 1fr)";
-  const prodGap = bp === "mobile" || bp === "phablet"
+  const prodGap = bp === "foldable" || bp === "mobile" || bp === "phablet"
     ? "0.875rem"
     : "clamp(1.25rem, 2vw, 2.5rem)";
 
