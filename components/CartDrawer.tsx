@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useEffect } from "react";
 
@@ -148,15 +149,17 @@ export default function CartDrawer() {
               </span>
             </div>
             <p style={{ fontSize: "0.75rem", color: "#A0A097", fontFamily: "var(--font-inter),system-ui,sans-serif", marginBottom: "1.25rem" }}>
-              Shipping calculated at checkout · Free over $120
+              $25 flat-rate delivery · Free local pickup in Fraser Rise
             </p>
 
             {/* Checkout */}
-            <button
-              style={{ width: "100%", padding: "1.125rem", background: "#0E0D09", color: "#F8F4EE", border: "none", borderRadius: "100px", fontSize: "0.875rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-inter),system-ui,sans-serif", marginBottom: "0.75rem" }}
+            <Link
+              href="/checkout"
+              onClick={closeCart}
+              style={{ display: "block", width: "100%", padding: "1.125rem", background: "#0E0D09", color: "#F8F4EE", border: "none", borderRadius: "100px", fontSize: "0.875rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-inter),system-ui,sans-serif", marginBottom: "0.75rem", textDecoration: "none", textAlign: "center", boxSizing: "border-box" }}
             >
               Proceed to Checkout
-            </button>
+            </Link>
 
             {/* WhatsApp checkout alternative */}
             <a

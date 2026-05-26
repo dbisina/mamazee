@@ -3,7 +3,7 @@
 import ScrollReveal from "./ScrollReveal";
 import Link from "next/link";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
-import { products } from "@/lib/products";
+import type { CategoryCounts } from "@/lib/fetchProducts";
 
 const cats = [
   {
@@ -40,7 +40,7 @@ const cats = [
   },
 ];
 
-export default function Categories() {
+export default function Categories({ counts = {} }: { counts?: CategoryCounts }) {
   const bp = useBreakpoint();
   const catCols =
     bp === "foldable" || bp === "mobile" || bp === "phablet" ? "1fr" :
@@ -158,7 +158,7 @@ export default function Categories() {
                     fontWeight: 500,
                   }}
                 >
-                  {products.filter(p => p.category === cat.id).length} products
+                  {counts[cat.id] ?? 0} products
                 </span>
 
                 {/* Category name */}

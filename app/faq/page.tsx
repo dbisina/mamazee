@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     q: "Can I pick up my order in-store?",
-    a: "Absolutely. Our Deanside (Melbourne) store offers local pick-up Tuesday–Sunday, 10:00 AM–7:00 PM. Place your order online and allow 2–3 hours for packing. We'll send you a WhatsApp notification when it's ready.",
+    a: "Absolutely. Our Fraser Rise (Melbourne) store offers local pick-up Tuesday–Sunday, 10:00 AM–7:00 PM. Place your order online and allow 2–3 hours for packing. We'll send you a WhatsApp notification when it's ready.",
   },
   {
     q: "Are your products freshly imported?",

@@ -95,6 +95,7 @@ export default function Newsletter() {
               >
                 <input
                   type="email"
+                  suppressHydrationWarning
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"

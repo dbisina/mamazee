@@ -22,7 +22,7 @@ const links = {
 const socialLinks = [
   {
     label: "Instagram",
-    href: "https://instagram.com/mamazee.au",
+    href: "https://www.instagram.com/mamazee_naijashop/",
     color: "#C4813A",
     icon: (
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -126,7 +126,7 @@ export default function Footer() {
             <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
               <p style={{ fontSize: "0.8125rem", color: "rgba(248,244,238,0.4)", fontFamily: "var(--font-inter), system-ui, sans-serif", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C4813A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                68 Malone Cct, Deanside VIC 3336
+                8 Climate St, Fraser Rise VIC 3336
               </p>
               <a href="https://wa.me/61468324309" style={{ fontSize: "0.8125rem", color: "rgba(248,244,238,0.4)", fontFamily: "var(--font-inter), system-ui, sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C4813A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.99 2.18 2 2 0 012.98 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>

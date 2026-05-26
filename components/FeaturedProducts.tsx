@@ -6,9 +6,9 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
-import { featuredProducts } from "@/lib/products";
+import type { Product } from "@/lib/products";
 
-function ProductCard({ product, index }: { product: (typeof featuredProducts)[0]; index: number }) {
+function ProductCard({ product, index }: { product: Product; index: number }) {
   const [hovered, setHovered] = useState(false);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
@@ -162,7 +162,7 @@ function ProductCard({ product, index }: { product: (typeof featuredProducts)[0]
   );
 }
 
-export default function FeaturedProducts() {
+export default function FeaturedProducts({ products }: { products: Product[] }) {
   const bp = useBreakpoint();
   const prodCols =
     bp === "foldable" || bp === "mobile" || bp === "phablet" ? "1fr" :
@@ -244,7 +244,7 @@ export default function FeaturedProducts() {
 
         {/* Product grid */}
         <div style={{ display: "grid", gridTemplateColumns: prodCols, gap: prodGap }}>
-          {featuredProducts.map((product, i) => (
+          {products.map((product, i) => (
             <ProductCard key={product.id} product={product} index={i} />
           ))}
         </div>

@@ -18,7 +18,7 @@ const faqs = [
   { q: "When do you dispatch?", a: "Orders placed before 12PM Monday–Saturday are dispatched the same day. Orders after 12PM dispatch the next business day." },
   { q: "Do you offer free shipping?", a: "Free standard shipping on orders over $120 Australia-wide." },
   { q: "What carriers do you use?", a: "Australia Post and Couriers Please, both with full tracking. You'll receive a tracking number by email once your order is dispatched." },
-  { q: "Can I pick up in-store?", a: "Yes, pick-up is available at 68 Malone Cct, Deanside VIC 3336. Tuesday to Sunday, 10:00 AM to 7:00 PM. Allow 2 to 3 hours from order time." },
+  { q: "Can I pick up in-store?", a: "Yes, pick-up is available at 8 Climate St, Fraser Rise VIC 3336. Tuesday to Sunday, 10:00 AM to 7:00 PM. Allow 2 to 3 hours from order time." },
   { q: "What if my order arrives damaged?", a: "Contact us within 48 hours with a photo. We'll replace or refund, no questions asked." },
 ];
 
@@ -50,7 +50,7 @@ export default function ShippingPage() {
               { num: "$120+", label: "Free shipping", sub: "On all orders over $120" },
               { num: "Same day", label: "Dispatch", sub: "Orders before 12PM, Mon–Sat" },
               { num: "Tracked", label: "Delivery", sub: "Australia Post & Couriers Please" },
-              { num: "2–3 hrs", label: "Pick-up ready", sub: "Deanside store, Tue–Sun" },
+              { num: "2–3 hrs", label: "Pick-up ready", sub: "Fraser Rise store, Tue–Sun" },
             ].map((s) => (
               <div key={s.label} style={{ padding: "2rem", borderRadius: "1.25rem", border: "1px solid rgba(14,13,9,0.1)", background: "#fff" }}>
                 <div style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(1.75rem,3vw,2.5rem)", fontWeight: 400, color: "#2D5A16", lineHeight: 1, letterSpacing: "-0.02em" }}>{s.num}</div>
@@ -98,11 +98,11 @@ export default function ShippingPage() {
               <p style={{ fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C4813A", marginBottom: "0.75rem", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 500 }}>Free Option</p>
               <h3 style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(1.75rem,3.5vw,2.75rem)", fontWeight: 400, color: "#F8F4EE", margin: "0 0 0.75rem", letterSpacing: "-0.02em" }}>In-Store Pick-Up</h3>
               <p style={{ fontSize: "0.9375rem", color: "rgba(248,244,238,0.65)", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 300, maxWidth: "420px", lineHeight: 1.7 }}>
-                Free, always. Order online and collect from our Deanside store. Ready within 2–3 hours.
+                Free, always. Order online and collect from our Fraser Rise store. Ready within 2–3 hours.
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", justifyContent: "center" }}>
-              <p style={{ fontSize: "0.875rem", color: "rgba(248,244,238,0.7)", fontFamily: "var(--font-inter),system-ui,sans-serif" }}>📍 68 Malone Cct, Deanside VIC 3336</p>
+              <p style={{ fontSize: "0.875rem", color: "rgba(248,244,238,0.7)", fontFamily: "var(--font-inter),system-ui,sans-serif" }}>📍 8 Climate St, Fraser Rise VIC 3336</p>
               <p style={{ fontSize: "0.875rem", color: "rgba(248,244,238,0.7)", fontFamily: "var(--font-inter),system-ui,sans-serif" }}>🕐 Tue–Sun · 10:00 AM – 7:00 PM</p>
               <p style={{ fontSize: "0.875rem", color: "rgba(248,244,238,0.7)", fontFamily: "var(--font-inter),system-ui,sans-serif" }}>📞 +61 468 324 309</p>
             </div>

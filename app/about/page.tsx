@@ -88,11 +88,11 @@ export default function AboutPage() {
           <div style={{ marginTop: "clamp(6rem,10vw,10rem)", padding: "clamp(3rem,6vw,5rem)", background: "#0E0D09", borderRadius: "1.5rem", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "2rem" }}>
             <div>
               <p style={{ fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C4813A", marginBottom: "0.75rem", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 500 }}>Visit Us</p>
-              <h3 style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(1.75rem,4vw,3rem)", fontWeight: 400, color: "#F8F4EE", margin: "0 0 0.75rem", letterSpacing: "-0.02em" }}>68 Malone Cct, Deanside VIC 3336</h3>
+              <h3 style={{ fontFamily: "var(--font-cormorant),Georgia,serif", fontSize: "clamp(1.75rem,4vw,3rem)", fontWeight: 400, color: "#F8F4EE", margin: "0 0 0.75rem", letterSpacing: "-0.02em" }}>8 Climate St, Fraser Rise VIC 3336</h3>
               <p style={{ fontSize: "0.9375rem", color: "rgba(248,244,238,0.55)", fontFamily: "var(--font-inter),system-ui,sans-serif", fontWeight: 300 }}>Tue–Sun · 10:00 AM – 7:00 PM · +61 468 324 309</p>
             </div>
             <a
-              href="https://maps.google.com/?cid=15851661521598341560"
+              href="https://maps.google.com/?q=8+Climate+St,+Fraser+Rise+VIC+3336"
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: "inline-flex", alignItems: "center", gap: "0.75rem", padding: "1rem 2rem", background: "#2D5A16", color: "#F8F4EE", fontSize: "0.875rem", letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 500, textDecoration: "none", borderRadius: "100px", whiteSpace: "nowrap", fontFamily: "var(--font-inter),system-ui,sans-serif", flexShrink: 0 }}

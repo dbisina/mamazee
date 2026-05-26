@@ -6,12 +6,12 @@ import Footer from "@/components/Footer";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 const STORE = {
-  address: "68 Malone Cct, Deanside VIC 3336",
+  address: "8 Climate St, Fraser Rise VIC 3336",
   phone: "+61 468 324 309",
   whatsapp: "https://wa.me/61468324309",
   hours: "Tuesday–Sunday · 10:00 AM – 7:00 PM",
-  mapSrc: "https://maps.google.com/maps?ll=-37.716892,144.702519&z=16&t=m&output=embed",
-  mapsLink: "https://maps.google.com/?cid=15851661521598341560",
+  mapSrc: "https://maps.google.com/maps?q=8+Climate+St,+Fraser+Rise+VIC+3336&output=embed",
+  mapsLink: "https://maps.google.com/?q=8+Climate+St,+Fraser+Rise+VIC+3336",
 };
 
 export default function ContactPage() {
