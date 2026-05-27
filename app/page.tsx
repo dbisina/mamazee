@@ -1,3 +1,5 @@
+export const revalidate = 60 // ISR: re-fetch products every 60s
+
 import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
 import Marquee from '@/components/Marquee'

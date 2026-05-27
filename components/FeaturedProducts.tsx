@@ -163,6 +163,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 }
 
 export default function FeaturedProducts({ products }: { products: Product[] }) {
+  if (!products.length) return null
   const bp = useBreakpoint();
   const prodCols =
     bp === "foldable" || bp === "mobile" || bp === "phablet" ? "1fr" :

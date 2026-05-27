@@ -10,8 +10,11 @@ export async function fetchProducts(): Promise<Product[]> {
     .eq('active', true)
     .order('category')
     .order('name')
-  if (error || !data) return []
-  return data as Product[]
+  if (error) {
+    console.error('[fetchProducts] Supabase error:', error.message)
+    return []
+  }
+  return (data ?? []) as Product[]
 }
 
 export async function fetchFeatured(): Promise<Product[]> {
@@ -21,8 +24,11 @@ export async function fetchFeatured(): Promise<Product[]> {
     .eq('active', true)
     .eq('featured', true)
     .order('name')
-  if (error || !data) return []
-  return data as Product[]
+  if (error) {
+    console.error('[fetchFeatured] Supabase error:', error.message)
+    return []
+  }
+  return (data ?? []) as Product[]
 }
 
 export type CategoryCounts = Record<string, number>
