@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
@@ -41,12 +40,15 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             marginBottom: "1.25rem",
           }}
         >
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={product.image}
             alt={product.name}
-            fill
-            sizes="(max-width: 768px) 50vw, 25vw"
             style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
               objectFit: "cover",
               transition: "transform 0.7s cubic-bezier(0.16,1,0.3,1)",
               transform: hovered ? "scale(1.07)" : "scale(1)",
