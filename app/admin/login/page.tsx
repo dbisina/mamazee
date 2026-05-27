@@ -1,11 +1,9 @@
 'use client'
 
 import { useState, FormEvent } from 'react'
-import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
 export default function AdminLoginPage() {
-  const router = useRouter()
   const supabase = createClient()
 
   const [email, setEmail] = useState('')
@@ -23,7 +21,9 @@ export default function AdminLoginPage() {
       setLoading(false)
       return
     }
-    router.push('/admin')
+    // Full page navigation — forces middleware to re-run with the new session cookie.
+    // router.push() is client-side and fires before the cookie propagates, causing infinite loading.
+    window.location.href = '/admin'
   }
 
   return (
