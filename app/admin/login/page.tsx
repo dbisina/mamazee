@@ -84,19 +84,12 @@ export default function AdminLoginPage() {
       >
         {/* Logo */}
         <div style={{ marginBottom: '2.25rem' }}>
-          <h1
-            style={{
-              fontFamily: 'var(--font-cormorant), Georgia, serif',
-              fontSize: '2.25rem',
-              fontWeight: 600,
-              color: '#0E0D09',
-              margin: 0,
-              letterSpacing: '0.01em',
-              lineHeight: 1,
-            }}
-          >
-            Mamazee
-          </h1>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.png"
+            alt="Mamazee"
+            style={{ height: '72px', width: 'auto', display: 'block', borderRadius: '0.625rem', marginBottom: '0.75rem' }}
+          />
           <span
             style={{
               fontFamily: 'var(--font-inter), system-ui, sans-serif',
@@ -106,7 +99,6 @@ export default function AdminLoginPage() {
               textTransform: 'uppercase',
               letterSpacing: '0.18em',
               display: 'block',
-              marginTop: '0.35rem',
             }}
           >
             Admin Portal

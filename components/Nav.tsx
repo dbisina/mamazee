@@ -88,17 +88,40 @@ export default function Nav() {
           <Link
             href="/"
             style={{
-              fontFamily: "var(--font-cormorant), Georgia, serif",
-              fontSize: isFoldable ? "1.375rem" : "1.75rem",
-              fontWeight: 500,
-              letterSpacing: "-0.02em",
-              color: logoColor,
               textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
               lineHeight: 1,
-              transition: "color 0.3s ease",
+              flexShrink: 0,
             }}
           >
-            Mamazee
+            {/* Show image on light bg (homepage or scrolled); text on dark unscrolled inner pages */}
+            {(!isDarkPage || scrolled) ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src="/logo.png"
+                alt="Mamazee"
+                style={{
+                  height: isFoldable ? "36px" : "44px",
+                  width: "auto",
+                  display: "block",
+                  borderRadius: "0.5rem",
+                }}
+              />
+            ) : (
+              <span
+                style={{
+                  fontFamily: "var(--font-cormorant), Georgia, serif",
+                  fontSize: isFoldable ? "1.375rem" : "1.75rem",
+                  fontWeight: 500,
+                  letterSpacing: "-0.02em",
+                  color: "#F8F4EE",
+                  transition: "color 0.3s ease",
+                }}
+              >
+                Mamazee
+              </span>
+            )}
           </Link>
 
           {/* Desktop links */}
