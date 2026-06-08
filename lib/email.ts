@@ -1,8 +1,21 @@
 import 'server-only'
-import { Resend } from 'resend'
+import nodemailer from 'nodemailer'
 
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
-const FROM = process.env.RESEND_FROM_EMAIL ?? 'Mamazee <orders@mamazee.com.au>'
+const SMTP_HOST = process.env.SMTP_HOST
+const SMTP_PORT = Number(process.env.SMTP_PORT ?? '465')
+const SMTP_USER = process.env.SMTP_USER
+const SMTP_PASS = process.env.SMTP_PASS
+const FROM = process.env.SMTP_FROM_EMAIL ?? 'Mamazee <orders@mamazee.com.au>'
+
+const transporter =
+  SMTP_HOST && SMTP_USER && SMTP_PASS
+    ? nodemailer.createTransport({
+        host: SMTP_HOST,
+        port: SMTP_PORT,
+        secure: SMTP_PORT === 465,
+        auth: { user: SMTP_USER, pass: SMTP_PASS },
+      })
+    : null
 
 interface OrderConfirmationItem {
   name: string
@@ -25,8 +38,8 @@ function formatAmount(cents: number, currency: string) {
 }
 
 export async function sendOrderConfirmationEmail(order: OrderConfirmationInput) {
-  if (!resend) {
-    console.warn('[email] RESEND_API_KEY not set — skipping order confirmation email')
+  if (!transporter) {
+    console.warn('[email] SMTP_HOST/SMTP_USER/SMTP_PASS not set — skipping order confirmation email')
     return
   }
 
@@ -53,7 +66,7 @@ export async function sendOrderConfirmationEmail(order: OrderConfirmationInput) 
   `
 
   try {
-    await resend.emails.send({
+    await transporter.sendMail({
       from: FROM,
       to: order.to,
       subject: `Order confirmed — #${order.orderId.slice(-8).toUpperCase()}`,
