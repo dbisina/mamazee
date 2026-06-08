@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Stripe from 'stripe'
 import { createClient } from '@/lib/supabase/server'
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-04-22.dahlia' as any })
+import { adminClient } from '@/lib/supabase/admin'
 
 export async function GET(req: NextRequest) {
   const supabase = await createClient()
@@ -11,26 +8,37 @@ export async function GET(req: NextRequest) {
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const { searchParams } = new URL(req.url)
-  const limit = Number(searchParams.get('limit') || '50')
+  const limit = Number(searchParams.get('limit') || '100')
 
-  const sessions = await stripe.checkout.sessions.list({
-    limit,
-    expand: ['data.line_items'],
+  const { data, error } = await adminClient
+    .from('orders')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(limit)
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+  const orders = (data ?? []).map((o) => {
+    type OrderItem = { name: string; quantity: number }
+    const items = (Array.isArray(o.items) ? o.items : []) as OrderItem[]
+    const itemsSummary = items.map((i) => `${i.name} ×${i.quantity}`).join(', ') || '—'
+
+    return {
+      id: o.id,
+      created: Math.floor(new Date(o.created_at).getTime() / 1000),
+      customerEmail: o.customer_email ?? '—',
+      customerName: o.customer_name ?? '—',
+      amountTotal: o.amount_total ?? 0,
+      currency: o.currency ?? 'aud',
+      paymentStatus: o.payment_status,
+      status: o.status,
+      deliveryMethod: o.delivery_method ?? '—',
+      shippingAddress: o.shipping_address ?? '—',
+      itemCount: items.length,
+      items,
+      itemsSummary,
+    }
   })
 
-  const orders = sessions.data.map((s) => ({
-    id: s.id,
-    created: s.created,
-    customerEmail: s.customer_email ?? s.customer_details?.email ?? '—',
-    customerName: s.customer_details?.name ?? s.metadata?.shipping_name ?? '—',
-    amountTotal: s.amount_total ?? 0,
-    currency: s.currency ?? 'aud',
-    paymentStatus: s.payment_status,
-    status: s.status,
-    deliveryMethod: s.metadata?.delivery_method ?? '—',
-    shippingAddress: s.metadata?.shipping_address ?? s.metadata?.pickup_location ?? '—',
-    itemCount: s.line_items?.data?.length ?? 0,
-  }))
-
-  return NextResponse.json({ orders, total: sessions.data.length })
+  return NextResponse.json({ orders, total: orders.length })
 }

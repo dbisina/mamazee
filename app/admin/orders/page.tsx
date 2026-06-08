@@ -1,6 +1,12 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
+import { useRouter } from 'next/navigation'
+
+interface OrderItem {
+  name: string
+  quantity: number
+}
 
 interface Order {
   id: string
@@ -14,6 +20,8 @@ interface Order {
   deliveryMethod: string
   shippingAddress: string
   itemCount: number
+  items: OrderItem[]
+  itemsSummary: string
 }
 
 function formatDate(ts: number) {
@@ -46,6 +54,34 @@ function PaymentBadge({ status }: { status: string }) {
     color: '#5C5B54',
     border: '1px solid rgba(92,91,84,0.2)',
   }
+  return (
+    <span
+      style={{
+        ...style,
+        padding: '0.2rem 0.6rem',
+        borderRadius: '999px',
+        fontSize: '0.75rem',
+        fontFamily: 'var(--font-inter), system-ui, sans-serif',
+        fontWeight: 500,
+        display: 'inline-block',
+        whiteSpace: 'nowrap',
+      }}
+    >
+      {status}
+    </span>
+  )
+}
+
+const FULFILLMENT_STYLES: Record<string, React.CSSProperties> = {
+  pending: { background: 'rgba(92,91,84,0.1)', color: '#5C5B54', border: '1px solid rgba(92,91,84,0.2)' },
+  processing: { background: 'rgba(196,129,58,0.12)', color: '#C4813A', border: '1px solid rgba(196,129,58,0.2)' },
+  fulfilled: { background: 'rgba(45,90,22,0.12)', color: '#2D5A16', border: '1px solid rgba(45,90,22,0.2)' },
+  shipped: { background: '#0E0D09', color: '#F8F4EE', border: '1px solid #0E0D09' },
+  cancelled: { background: 'rgba(200,0,0,0.08)', color: '#c00', border: '1px solid rgba(200,0,0,0.2)' },
+}
+
+function FulfillmentBadge({ status }: { status: string }) {
+  const style = FULFILLMENT_STYLES[status] ?? FULFILLMENT_STYLES.pending
   return (
     <span
       style={{
@@ -127,7 +163,7 @@ function MethodBadge({ method }: { method: string }) {
 function SkeletonRow() {
   return (
     <tr>
-      {Array.from({ length: 7 }).map((_, i) => (
+      {Array.from({ length: 9 }).map((_, i) => (
         <td key={i} style={{ padding: '1rem' }}>
           <div
             style={{
@@ -145,14 +181,17 @@ function SkeletonRow() {
 }
 
 function OrderCard({ order }: { order: Order }) {
+  const router = useRouter()
   return (
     <div
+      onClick={() => router.push(`/admin/orders/${order.id}`)}
       style={{
         background: '#fff',
         borderRadius: '1rem',
         border: '1px solid rgba(14,13,9,0.08)',
         padding: '1.25rem',
         marginBottom: '0.75rem',
+        cursor: 'pointer',
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
@@ -200,8 +239,21 @@ function OrderCard({ order }: { order: Order }) {
           {formatDate(order.created)}
         </span>
         <PaymentBadge status={order.paymentStatus} />
+        <FulfillmentBadge status={order.status} />
         <MethodBadge method={order.deliveryMethod} />
       </div>
+      {order.itemsSummary && order.itemsSummary !== '—' && (
+        <div
+          style={{
+            fontFamily: 'var(--font-inter), system-ui, sans-serif',
+            fontSize: '0.8125rem',
+            color: '#0E0D09',
+            marginTop: '0.625rem',
+          }}
+        >
+          {order.itemsSummary}
+        </div>
+      )}
       {order.shippingAddress && order.shippingAddress !== '—' && (
         <div
           style={{
@@ -223,6 +275,7 @@ function OrderCard({ order }: { order: Order }) {
 }
 
 export default function OrdersPage() {
+  const router = useRouter()
   const [orders, setOrders] = useState<Order[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -430,9 +483,11 @@ export default function OrdersPage() {
                 <th style={thStyle}>Date</th>
                 <th style={thStyle}>Customer</th>
                 <th style={thStyle}>Email</th>
+                <th style={thStyle}>Items</th>
                 <th style={thStyle}>Method</th>
                 <th style={{ ...thStyle, textAlign: 'right' }}>Amount</th>
-                <th style={thStyle}>Status</th>
+                <th style={thStyle}>Payment</th>
+                <th style={thStyle}>Fulfillment</th>
                 <th style={thStyle}>Address</th>
               </tr>
             </thead>
@@ -441,7 +496,7 @@ export default function OrdersPage() {
               {!loading && !error && filtered.length === 0 && (
                 <tr>
                   <td
-                    colSpan={7}
+                    colSpan={9}
                     style={{
                       ...tdStyle,
                       textAlign: 'center',
@@ -463,7 +518,9 @@ export default function OrdersPage() {
                       borderBottom: '1px solid rgba(14,13,9,0.06)',
                       background: hoveredRow === order.id ? '#F8F4EE' : '#fff',
                       transition: 'background 0.15s',
+                      cursor: 'pointer',
                     }}
+                    onClick={() => router.push(`/admin/orders/${order.id}`)}
                     onMouseEnter={() => setHoveredRow(order.id)}
                     onMouseLeave={() => setHoveredRow(null)}
                   >
@@ -474,6 +531,19 @@ export default function OrdersPage() {
                       {order.customerName}
                     </td>
                     <td style={{ ...tdStyle, color: '#5C5B54' }}>{order.customerEmail}</td>
+                    <td
+                      style={{
+                        ...tdStyle,
+                        color: '#5C5B54',
+                        maxWidth: '240px',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}
+                      title={order.itemsSummary}
+                    >
+                      {order.itemsSummary}
+                    </td>
                     <td style={tdStyle}>
                       <MethodBadge method={order.deliveryMethod} />
                     </td>
@@ -482,6 +552,9 @@ export default function OrdersPage() {
                     </td>
                     <td style={tdStyle}>
                       <PaymentBadge status={order.paymentStatus} />
+                    </td>
+                    <td style={tdStyle}>
+                      <FulfillmentBadge status={order.status} />
                     </td>
                     <td
                       style={{

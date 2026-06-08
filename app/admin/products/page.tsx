@@ -361,11 +361,11 @@ export default function AdminProductsPage() {
                         style={{
                           padding: '0.875rem 1.25rem',
                           fontSize: '0.9375rem',
-                          color: p.stock_quantity < 5 ? '#C4813A' : '#0E0D09',
+                          color: p.stock_quantity === 0 ? '#c00' : p.stock_quantity < 5 ? '#C4813A' : '#0E0D09',
                           fontWeight: p.stock_quantity < 5 ? 500 : 400,
                         }}
                       >
-                        {p.stock_quantity}
+                        {p.stock_quantity === 0 ? 'Out of stock' : p.stock_quantity}
                       </td>
 
                       {/* Featured */}

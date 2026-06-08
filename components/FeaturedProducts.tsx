@@ -11,8 +11,10 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
   const [hovered, setHovered] = useState(false);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
+  const outOfStock = (product.stock_quantity ?? 0) <= 0;
 
   const handleAdd = () => {
+    if (outOfStock) return;
     addItem({ id: product.id, name: product.name, price: product.price, unit: product.unit, image: product.image });
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
@@ -50,13 +52,37 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              transition: "transform 0.7s cubic-bezier(0.16,1,0.3,1)",
+              transition: "transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease, filter 0.2s ease",
               transform: hovered ? "scale(1.07)" : "scale(1)",
+              opacity: outOfStock ? 0.5 : 1,
+              filter: outOfStock ? "grayscale(0.4)" : "none",
             }}
           />
 
+          {/* Out of stock badge */}
+          {outOfStock && (
+            <span
+              style={{
+                position: "absolute",
+                top: "1rem",
+                left: "1rem",
+                fontSize: "0.625rem",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                fontWeight: 500,
+                padding: "0.375rem 0.75rem",
+                borderRadius: "100px",
+                background: "#5C5B54",
+                color: "#F8F4EE",
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+              }}
+            >
+              Out of Stock
+            </span>
+          )}
+
           {/* Tag */}
-          {product.tag && (
+          {!outOfStock && product.tag && (
             <span
               style={{
                 position: "absolute",
@@ -80,6 +106,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           {/* Add to cart overlay */}
           <button
             onClick={handleAdd}
+            disabled={outOfStock}
             style={{
               position: "absolute",
               bottom: "1rem",
@@ -87,21 +114,21 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               transform: hovered ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(calc(100% + 1rem))",
               transition: "transform 0.45s cubic-bezier(0.16,1,0.3,1), background 0.2s ease",
               padding: "0.75rem 1.5rem",
-              background: added ? "#2D5A16" : "#F8F4EE",
-              color: added ? "#F8F4EE" : "#0E0D09",
+              background: outOfStock ? "rgba(92,91,84,0.85)" : added ? "#2D5A16" : "#F8F4EE",
+              color: outOfStock ? "#F8F4EE" : added ? "#F8F4EE" : "#0E0D09",
               border: "none",
               borderRadius: "100px",
               fontSize: "0.75rem",
               letterSpacing: "0.1em",
               textTransform: "uppercase",
               fontWeight: 500,
-              cursor: "pointer",
+              cursor: outOfStock ? "not-allowed" : "pointer",
               whiteSpace: "nowrap",
               fontFamily: "var(--font-inter), system-ui, sans-serif",
               boxShadow: "0 8px 24px rgba(14,13,9,0.12)",
             }}
           >
-            {added ? "Added ✓" : "Add to Cart"}
+            {outOfStock ? "Out of Stock" : added ? "Added ✓" : "Add to Cart"}
           </button>
         </div>
 

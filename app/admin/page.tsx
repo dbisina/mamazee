@@ -10,6 +10,14 @@ interface Stats {
   revenue: number | null
 }
 
+const LOW_STOCK_THRESHOLD = 5
+
+interface LowStockProduct {
+  id: string
+  name: string
+  stock_quantity: number
+}
+
 function fmt(val: number | null, prefix?: string) {
   if (val === null) return '—'
   if (prefix)
@@ -24,18 +32,25 @@ export default function AdminDashboard() {
     totalOrders: null,
     revenue: null,
   })
+  const [lowStock, setLowStock] = useState<LowStockProduct[]>([])
 
   useEffect(() => {
     async function fetchStats() {
       try {
         const res = await fetch('/api/products')
         if (res.ok) {
-          const products = await res.json() as Array<{ active?: boolean }>
+          const products = await res.json() as Array<{ id: string; name: string; active?: boolean; stock_quantity?: number }>
           setStats((s) => ({
             ...s,
             totalProducts: products.length,
             activeProducts: products.filter((p) => p.active === true).length,
           }))
+          setLowStock(
+            products
+              .filter((p) => (p.stock_quantity ?? 0) <= LOW_STOCK_THRESHOLD)
+              .sort((a, b) => (a.stock_quantity ?? 0) - (b.stock_quantity ?? 0))
+              .map((p) => ({ id: p.id, name: p.name, stock_quantity: p.stock_quantity ?? 0 }))
+          )
         }
       } catch { /* leave null */ }
 
@@ -134,6 +149,59 @@ export default function AdminDashboard() {
           </div>
         ))}
       </div>
+
+      {/* Low stock alert */}
+      {lowStock.length > 0 && (
+        <div
+          style={{
+            background: 'rgba(196,129,58,0.08)',
+            border: '1px solid rgba(196,129,58,0.25)',
+            borderRadius: '0.75rem',
+            padding: '1.25rem 1.5rem',
+            marginBottom: '3rem',
+          }}
+        >
+          <style>{`
+            .low-stock-row { transition: background 0.15s ease, padding-left 0.15s ease; border-radius: 0.375rem; }
+            .low-stock-row:hover { background: rgba(196,129,58,0.1); padding-left: 0.5rem; }
+          `}</style>
+          <p
+            style={{
+              fontSize: '0.6875rem',
+              fontWeight: 500,
+              color: '#C4813A',
+              textTransform: 'uppercase',
+              letterSpacing: '0.12em',
+              margin: '0 0 0.75rem',
+            }}
+          >
+            ⚠ Low stock ({lowStock.length})
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {lowStock.map((p) => (
+              <Link
+                key={p.id}
+                href={`/admin/products/${p.id}/edit`}
+                className="low-stock-row"
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  textDecoration: 'none',
+                  fontSize: '0.875rem',
+                  color: '#0E0D09',
+                  fontFamily: 'var(--font-inter), system-ui, sans-serif',
+                  padding: '0.375rem 0',
+                }}
+              >
+                <span>{p.name}</span>
+                <span style={{ color: p.stock_quantity === 0 ? '#c00' : '#C4813A', fontWeight: 500 }}>
+                  {p.stock_quantity === 0 ? 'Out of stock' : `${p.stock_quantity} left`}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Quick actions */}
       <div style={{ marginBottom: '3rem' }}>

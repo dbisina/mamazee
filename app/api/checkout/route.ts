@@ -50,6 +50,7 @@ export async function POST(req: NextRequest) {
         product_data: {
           name: item.name,
           description: item.unit,
+          metadata: { productId: item.id },
           ...(item.image ? { images: [item.image] } : {}),
         },
         unit_amount: Math.round(item.price * 100),
@@ -65,6 +66,7 @@ export async function POST(req: NextRequest) {
           product_data: {
             name: 'Shipping (AU-wide delivery)',
             description: 'Flat rate Australia-wide',
+            metadata: { productId: '' },
           },
           unit_amount: SHIPPING_COST_CENTS,
         },

@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "WebFetch(domain:mamazee.com.au)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(rtk git *)",
+      "Bash(rtk ls *)"
     ]
   }
 }

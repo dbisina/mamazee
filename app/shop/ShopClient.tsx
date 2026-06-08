@@ -22,6 +22,7 @@ function ProductCard({ product }: { product: Product }) {
   const { addItem, items, setQty } = useCart()
   const cartItem = items.find((i) => i.id === product.id)
   const qty = cartItem?.quantity ?? 0
+  const outOfStock = (product.stock_quantity ?? 0) <= 0
 
   return (
     <div
@@ -47,12 +48,35 @@ function ProductCard({ product }: { product: Product }) {
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            transition: 'transform 0.7s cubic-bezier(0.16,1,0.3,1)',
+            transition: 'transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease, filter 0.2s ease',
             transform: hovered ? 'scale(1.07)' : 'scale(1)',
+            opacity: outOfStock ? 0.5 : 1,
+            filter: outOfStock ? 'grayscale(0.4)' : 'none',
           }}
         />
 
-        {product.tag && (
+        {outOfStock && (
+          <span
+            style={{
+              position: 'absolute',
+              top: '1rem',
+              left: '1rem',
+              fontSize: '0.625rem',
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              fontWeight: 500,
+              padding: '0.375rem 0.75rem',
+              borderRadius: '100px',
+              background: '#5C5B54',
+              color: '#F8F4EE',
+              fontFamily: 'var(--font-inter), system-ui, sans-serif',
+            }}
+          >
+            Out of Stock
+          </span>
+        )}
+
+        {!outOfStock && product.tag && (
           <span
             style={{
               position: 'absolute',
@@ -78,7 +102,33 @@ function ProductCard({ product }: { product: Product }) {
           </span>
         )}
 
-        {qty > 0 ? (
+        {outOfStock && qty === 0 ? (
+          <button
+            disabled
+            style={{
+              position: 'absolute',
+              bottom: '1rem',
+              left: '50%',
+              transform: hovered ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(calc(100% + 1rem))',
+              transition: 'transform 0.45s cubic-bezier(0.16,1,0.3,1)',
+              padding: '0.75rem 1.5rem',
+              background: 'rgba(92,91,84,0.85)',
+              color: '#F8F4EE',
+              border: 'none',
+              borderRadius: '100px',
+              fontSize: '0.75rem',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              fontWeight: 500,
+              cursor: 'not-allowed',
+              whiteSpace: 'nowrap',
+              fontFamily: 'var(--font-inter), system-ui, sans-serif',
+              boxShadow: '0 8px 24px rgba(14,13,9,0.12)',
+            }}
+          >
+            Out of Stock
+          </button>
+        ) : qty > 0 ? (
           <div
             style={{
               position: 'absolute',
@@ -103,8 +153,9 @@ function ProductCard({ product }: { product: Product }) {
               {qty}
             </span>
             <button
-              onClick={(e) => { e.stopPropagation(); setQty(product.id, qty + 1) }}
-              style={{ padding: '0.65rem 1rem', background: 'none', border: 'none', color: '#F8F4EE', fontSize: '1.1rem', lineHeight: 1, cursor: 'pointer', fontFamily: 'var(--font-inter), system-ui, sans-serif', fontWeight: 300 }}
+              onClick={(e) => { e.stopPropagation(); if (qty < (product.stock_quantity ?? Infinity)) setQty(product.id, qty + 1) }}
+              disabled={qty >= (product.stock_quantity ?? Infinity)}
+              style={{ padding: '0.65rem 1rem', background: 'none', border: 'none', color: '#F8F4EE', fontSize: '1.1rem', lineHeight: 1, cursor: qty >= (product.stock_quantity ?? Infinity) ? 'not-allowed' : 'pointer', opacity: qty >= (product.stock_quantity ?? Infinity) ? 0.4 : 1, fontFamily: 'var(--font-inter), system-ui, sans-serif', fontWeight: 300 }}
             >
               +
             </button>
