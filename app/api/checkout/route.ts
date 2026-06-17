@@ -39,10 +39,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Cart is empty' }, { status: 400 })
     }
 
-    const origin =
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      req.headers.get('origin') ||
-      'http://localhost:3000'
+    const origin = process.env.NEXT_PUBLIC_SITE_URL
+      ? process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '')
+      : req.nextUrl.origin;
 
     const lineItems = items.map((item) => ({
       price_data: {
@@ -78,16 +77,16 @@ export async function POST(req: NextRequest) {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/checkout/cancel`,
+      success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/checkout`,
       metadata: {
         delivery_method: method,
         ...(address
           ? {
-              shipping_name: `${address.firstName} ${address.lastName}`,
-              shipping_address: `${address.address}, ${address.suburb} ${address.state} ${address.postcode}`,
-              customer_phone: address.phone ?? '',
-            }
+            shipping_name: `${address.firstName} ${address.lastName}`,
+            shipping_address: `${address.address}, ${address.suburb} ${address.state} ${address.postcode}`,
+            customer_phone: address.phone ?? '',
+          }
           : { pickup_location: '8 Climate St, Fraser Rise VIC 3336' }),
       },
       customer_email: address?.email ?? undefined,
