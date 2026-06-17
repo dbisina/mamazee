@@ -25,7 +25,8 @@ export default function CheckoutSuccessPage() {
     clearCart();
     const t = setTimeout(() => setShow(true), 80);
     return () => clearTimeout(t);
-  }, [clearCart]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div style={{ background: "#F8F4EE", minHeight: "100vh" }}>
